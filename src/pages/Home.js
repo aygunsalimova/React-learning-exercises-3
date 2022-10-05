@@ -1,18 +1,20 @@
-import BlogList from '../BlogList'
-// import PhotoList from '../PhotoList'
-import useFetch from '../useFetch'
-
+import BlogList from '../components/BlogList'
+import useFetch from '../hooks/useFetch'
 
 const Home = () => {
-    const {blogs} = useFetch('http://localhost:8000/blogs')
-        
+    const [blogs, isPending, error] = useFetch('http://localhost:8000/blogs')
 
     return (  
         <div className="home">
-            {/* {photos && <PhotoList photos={photos}/>} */}
-            {blogs && <BlogList blogs={blogs} />}
-        </div>
+            {
+                error
+                    ? <p>{error.message}</p>
+                    : isPending
+                    ? <p>Data is in loading stage</p>
+                    : blogs && <BlogList blogs={blogs} />
 
+            }
+        </div>
     );
 }
  
