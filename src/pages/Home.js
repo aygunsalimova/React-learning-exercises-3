@@ -6,10 +6,15 @@ const Home = () => {
 
     return (  
         <div className="home">
-            {/* {photos && <PhotoList photos={photos}/>} */}
-            {blogs && <BlogList blogs={blogs} />}
-        </div>
+            {
+                error
+                    ? <p>{error.message}</p>
+                    : isPending
+                    ? <p>Data is in loading stage</p>
+                    : blogs && <BlogList blogs={blogs} />
 
+            }
+        </div>
     );
 }
  
